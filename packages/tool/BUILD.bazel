@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "tool",
+    srcs = ["foo.go"],
+    importpath = "github.com/helbing/monorepo-example/packages/tool",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "tool_test",
+    srcs = ["foo_test.go"],
+    embed = [":tool"],
+)
+
+alias(
+    name = "go_default_library",
+    actual = ":tool",
+    visibility = ["//visibility:public"],
+)
