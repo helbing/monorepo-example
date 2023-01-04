@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_library(
+    name = "greet_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/helbing/monorepo-example/projects/greet",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//gen/go/greet/v1:greet",
+        "//packages/tool",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_binary(
+    name = "greet",
+    embed = [":greet_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_image(
+    name = "greet_image",
+    embed = [":greet_lib"],
+    visibility = ["//visibility:public"],
+)

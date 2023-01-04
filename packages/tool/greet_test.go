@@ -2,8 +2,8 @@ package tool
 
 import "testing"
 
-func TestFoo(t *testing.T) {
-	got, want := Foo(), "bar"
+func TestGreeting(t *testing.T) {
+	got, want := Greeting("world"), "Hello world"
 	if got != want {
 		t.Errorf("Foo() = %v, want %v", got, want)
 	}

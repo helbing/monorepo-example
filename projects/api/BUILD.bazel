@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_library(
+    name = "api_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/helbing/monorepo-example/projects/api",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//gen/go/greet/v1:greet",
+        "@com_github_gin_gonic_gin//:gin",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_binary(
+    name = "api",
+    embed = [":api_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_image(
+    name = "api_image",
+    embed = [":api_lib"],
+    visibility = ["//visibility:public"],
+)

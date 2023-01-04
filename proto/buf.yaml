@@ -1,0 +1,9 @@
+version: v1
+deps:
+- buf.build/googleapis/googleapis:02dcec304088c964f198d7732e9c1d441d72d2db
+lint:
+  use:
+  - DEFAULT
+breaking:
+  use:
+  - WIRE_JSON
