@@ -7,14 +7,14 @@ go_library(
     visibility = ["//visibility:public"],
 )
 
-go_test(
-    name = "tool_test",
-    srcs = ["greet_test.go"],
-    embed = [":tool"],
-)
-
 alias(
     name = "go_default_library",
     actual = ":tool",
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "tool_test",
+    srcs = ["greet_test.go"],
+    embed = [":tool"],
 )
